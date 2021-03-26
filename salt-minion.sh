@@ -60,6 +60,7 @@ sudo apt install salt-minion -y -qq
 echo "Configuring your Salt Minion"
 
 if [ ! -f "/etc/salt/minion.d/local.conf" ]; then
+  echo "Creating local.conf"
   sudo touch /etc/salt/minion.d/local.conf
 fi
 
@@ -72,3 +73,6 @@ fi
 sudo service salt-minion restart
 
 echo "Your Salt Minion has been installed"
+echo ""
+echo "master: $masterIp"
+echo "id: $localId"
