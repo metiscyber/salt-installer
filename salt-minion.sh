@@ -2,6 +2,8 @@
 
 red=`tput setaf 1`
 green=`tput setaf 2`
+yellow=`tput setaf 3`
+
 reset=`tput sgr0`
 
 # shellcheck disable=SC2039
@@ -44,7 +46,7 @@ echo "${green}Running Salt Minion Install Script${reset}"
 uname=`uname`
 
 if [[ "$uname" == "Darwin" ]]; then
-  echo "This can only be ran on Linux machines"
+  echo "${red}This can only be ran on Linux machines${reset}"
   exit;
 fi
 
@@ -54,13 +56,13 @@ echo "Installing Salt-Stack Repository Sources"
 sudo curl -fsSL -o /usr/share/keyrings/salt-archive-keyring.gpg https://repo.saltproject.io/py3/ubuntu/20.04/amd64/latest/salt-archive-keyring.gpg > /dev/null
 echo "deb [signed-by=/usr/share/keyrings/salt-archive-keyring.gpg] https://repo.saltproject.io/py3/ubuntu/20.04/amd64/latest focal main" | sudo tee /etc/apt/sources.list.d/salt.list
 
-echo "Updating Repository Sources"
+echo "${yellow}Updating Repository Sources${reset}"
 sudo apt update -y -qq
 
-echo "Installing salt-minion"
+echo "${yellow}Installing salt-minion${reset}"
 
 sudo apt install salt-minion -y -qq
-echo "Configuring your Salt Minion"
+echo "${yellow}Configuring your Salt Minion${reset}"
 
 if [ ! -f "/etc/salt/minion.d/local.conf" ]; then
   echo "Creating local.conf"
@@ -77,7 +79,7 @@ fi
 
 sudo service salt-minion restart
 
-echo "Your Salt Minion has been installed"
+echo "${green}Your Salt Minion has been installed${reset}"
 echo ""
-echo "master: $masterIp"
-echo "id: $localId"
+echo "${green}master: $masterIp${reset}"
+echo "${green}id: $localId${reset}"
