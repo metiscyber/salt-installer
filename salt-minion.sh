@@ -48,7 +48,7 @@ fi
 # Install Salt Repos
 echo "Installing Salt-Stack Repository Sources"
 
-sudo curl -fsSL -o /usr/share/keyrings/salt-archive-keyring.gpg https://repo.saltproject.io/py3/ubuntu/20.04/amd64/latest/salt-archive-keyring.gpg
+sudo curl -fsSL -o /usr/share/keyrings/salt-archive-keyring.gpg https://repo.saltproject.io/py3/ubuntu/20.04/amd64/latest/salt-archive-keyring.gpg > /dev/null
 echo "deb [signed-by=/usr/share/keyrings/salt-archive-keyring.gpg] https://repo.saltproject.io/py3/ubuntu/20.04/amd64/latest focal main" | sudo tee /etc/apt/sources.list.d/salt.list
 
 echo "Updating Repository Sources"
@@ -65,8 +65,8 @@ fi
 
 if [ -f "/etc/salt/minion.d/local.conf" ]; then
   echo "Configuring local.conf"
-  echo "master: $masterIp" >> /etc/salt/minion/local.conf
-  echo "id: $localId" >> /etc/salt/minion/local.conf
+  echo "master: $masterIp" >> /etc/salt/minion.d/local.conf
+  echo "id: $localId" >> /etc/salt/minion.d/local.conf
 fi
 
 sudo service salt-minion restart
