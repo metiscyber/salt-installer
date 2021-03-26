@@ -62,6 +62,8 @@ echo "Configuring your Salt Minion"
 if [ ! -f "/etc/salt/minion.d/local.conf" ]; then
   echo "Creating local.conf"
   sudo touch /etc/salt/minion.d/local.conf
+elif [ -f "/etc/salt/minion.d/local.conf" ]; then
+  rm /etc/salt/minion.d/local.conf
 fi
 
 if [ -f "/etc/salt/minion.d/local.conf" ]; then
