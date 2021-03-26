@@ -1,5 +1,8 @@
 #!/bin/bash
 
+red=`tput setaf 1`
+green=`tput setaf 2`
+reset=`tput sgr0`
 
 # shellcheck disable=SC2039
 ARGUMENT_LIST=(
@@ -36,7 +39,7 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-echo "Running Salt Minion Install Script"
+echo "${green}Running Salt Minion Install Script${reset}"
 
 uname=`uname`
 
